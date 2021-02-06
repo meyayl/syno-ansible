@@ -1,8 +1,8 @@
 # Synology Ansible
 
-This project aims to brings the power of Ansible to your Synology NAS.
+This project aims to bring Ansible to your Synology NAS.
 
-It will create a user account permitted to login to your NAS via ssh keybased authentification.
+It will create the required user account permitted to login to your NAS via ssh keybased authentification.
 And of course run ansible playbooks using this user account.
 
 The script is ment to be executed with an admin useraccount (though not as root!)
@@ -19,10 +19,10 @@ If the included test playbook works fine, you can start to add your own playbook
 
 ## What does the script step do?
 Basicly it creates and configures everything required to run Ansible on your NAS:
-1. perform sanity checks
-2. add new admin user for ansible and fix home folder permissions
-3. add ansible user to sudoers
-4. creates a ssh key for ansible user and copies it into its home folder
-5. creates the ansible inventory
-6. creates the ansible.cfg with mitogen enabled (aka performance booseter)
+1. perform sanity checks (required to make sure the script does not unintended things on your NAS)
+2. add new admin user for ansible and fix home folder permissions (necessary for keybased-auth)
+3. add ansible user to sudoers (necessary to become root in the playbooks)
+4. creates a ssh key for ansible user and copies it into its home folder (necessary for keybased-auth)
+5. creates the ansible inventory (necessary to know how to context the NAS)
+6. creates the ansible.cfg with mitogen enabled (nice to have  performance booster)
 7. starts ansible in a docker container
