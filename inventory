@@ -1,0 +1,5 @@
+[all]
+dsm
+
+[all:vars]
+ansible_user=ansible

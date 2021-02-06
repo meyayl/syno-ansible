@@ -1,0 +1,7 @@
+server {
+    listen {{ nginx_http_to_https_redirect.listen }};
+    server_name {{ nginx_http_to_https_redirect.server_name | join(' ') }};
+
+    return 301 https://$host$request_uri;
+}
+

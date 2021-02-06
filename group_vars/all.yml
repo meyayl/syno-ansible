@@ -1,0 +1,4 @@
+---
+nginx_http_to_https_redirect:
+  listen: 80
+  server_name: ["www.egal.de", "www.jane.de"]

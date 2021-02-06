@@ -1,0 +1,6 @@
+---
+- name: add http to https redirect
+  template:
+    src: http_redirect.conf.j2
+    dest: /etc/nginx/conf.d/http.redirect.conf
+    mode: 0644

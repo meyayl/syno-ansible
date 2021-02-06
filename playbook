@@ -1,0 +1,6 @@
+---
+- name: add nginx http to https redirect 
+  hosts: all
+  become: true
+  roles:
+    - { role: nginx_http_to_https_redirect }
