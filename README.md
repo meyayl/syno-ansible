@@ -17,7 +17,7 @@ Make sure to either let the `ansible_user` stay as `ansible` or use any not yet 
 
 If the included test playbook works fine, you can start to add your own playbooks and roles to the folder.
 
-## What does the script step do?
+## What does the script do?
 Basicly it creates and configures everything required to run Ansible on your NAS:
 1. perform sanity checks (required to make sure the script does not unintended things on your NAS)
 2. add new admin user for ansible and fix home folder permissions (necessary for keybased-auth)
