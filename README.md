@@ -5,7 +5,7 @@ This project aims to brings the power of Ansible to your Synology NAS.
 It will create a user account permitted to login to your NAS via ssh keybased authentification.
 And of course run ansible playbooks using this user account.
 
-The script is ment to be used with an admin useraccount, but not as root!
+The script is ment to be executed with an admin useraccount (though not as root!)
 It will sudo inside the script, whenever root permissions are required.
 
 Make sure to either let the `ansible_user` stay as `ansible` or use any not yet existing username for it!
