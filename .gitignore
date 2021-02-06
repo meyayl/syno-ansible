@@ -1,4 +1,5 @@
 # Default ignored files
 ssh/
 ansible.cfg
+inventory
 /workspace.xml
