@@ -1,6 +1,7 @@
 #!/bin/bash -eu
 ansible_user=ansible
 ansible_pass=ansible
+ds_ssh_port=22
 
 function add_admin_user_and_fix_home_folder_permissions() {
   if [ $(sudo synouser --get "${ansible_user}" > /dev/null 2>&1; echo $?) -ne 0 ];then
@@ -66,6 +67,7 @@ ${HOSTNAME}
 
 [all:vars]
 ansible_user=${ansible_user}
+ansible_port=${ds_ssh_port}
 EOF
 }
 
@@ -79,9 +81,10 @@ CFG
 }
 
 function start_ansible_container() {
-  docker run -ti --rm \
+  _UID=$(id -u)
+  sudo docker run -ti --rm \
     -e USER=ansible \
-    -e UID=$(id -u) \
+    -e UID=${_UID} \
     -v ${PWD}/ssh/:/home/ansible/.ssh/ \
     -v ${PWD}:/data cytopia/ansible:2.8-tools \
     ansible-playbook playbook -i inventory
