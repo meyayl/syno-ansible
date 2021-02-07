@@ -13,11 +13,11 @@ function add_admin_user_and_fix_home_folder_permissions() {
       admins="${admins} ${admin}"
     done
     
-    sudo synogroup --member "administrators" ${admins} ${ansible_user} # only uses in group admistrators are allowd to login with key
+    sudo synogroup --member "administrators" ${admins} ${ansible_user} > /dev/null 2>&1;# only uses in group admistrators are allowd to login with key
     if [ $(sudo synogroup --get "ansible" > /dev/null 2>&1; echo $?) -ne 0 ];then
       sudo synogroup --add "ansible"
     fi
-    sudo synogroup  --member "ansible" "${ansible_user}"
+    sudo synogroup  --member "ansible" "${ansible_user}" > /dev/null 2>&1
     user_dir=$(sudo synouser --get "${ansible_user}" | grep -oP '(?<=User.Dir(.){4}: \[).*(?=\])')
     until [ -d ${user_dir} ]; do sleep 1;done
     sudo chmod 700 "${user_dir}"
@@ -100,7 +100,7 @@ function sanity_check() {
     exit 1
   fi
   set +e
-  user_data=$(sudo synouser --get ${ansible_user})
+  user_data=$(sudo synouser --get ${ansible_user} 2>&1)
   set -e
   if [ $(echo "${user_data}" | grep -wc 'SynoErr') -eq 1 ];then
     echo "user ${ansible_user} does not exist, will create it!"
