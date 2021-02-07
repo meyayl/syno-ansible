@@ -61,7 +61,8 @@ function create_key_and_copy_to_home_folder() {
 }
 
 function create_ansible_inventory() {
-  cat <<-EOF > inventory
+  if [ ! -e inventory ];then
+    cat <<-EOF > inventory
 [all]
 ${HOSTNAME}
 
@@ -69,15 +70,18 @@ ${HOSTNAME}
 ansible_user=${ansible_user}
 ansible_port=${ds_ssh_port}
 EOF
+  fi
 }
 
 function create_ansible_cfg() {
-  cat <<-CFG > ansible.cfg
+  if [ ! -e ansible.cfg ];then
+    cat <<-CFG > ansible.cfg
 [defaults]
 strategy_plugins  = /usr/lib/python3.6/site-packages/ansible_mitogen/plugins/strategy
 strategy          = mitogen_linear
 host_key_checking = False
 CFG
+  fi
 }
 
 function start_ansible_container() {
